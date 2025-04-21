@@ -143,6 +143,13 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .info-toggle {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      animation: fadeIn 0.5s ease;
+    }
   </style>
 </head>
 <body>
@@ -204,7 +211,7 @@
     <a class="btn" href="https://1xbet.com/registration-link" target="_blank">Зарегистрироваться</a>
 
     <p>После регистрации введи свой ID ниже:</p>
-    <input type="text" id="userID" placeholder="Введи ID от аккаунта" disabled>
+    <input type="text" id="userID" placeholder="Введи ID от аккаунта" oninput="validateID()" disabled>
     <button class="btn" onclick="unlockInput()">Я зарегистрировался</button>
     <button class="btn" id="continueBtn" onclick="showDepositStep()" disabled>Продолжить</button>
   </section>
@@ -213,6 +220,13 @@
     <div class="section-title">Пополнение</div>
     <p>Для запуска алгоритма на аккаунте необходимо пополнить баланс минимум на <b>5$</b></p>
     <a class="btn" href="https://t.me/YOUR_BOT" target="_blank">Пополнить</a>
+    
+    <!-- Кнопка "Зачем это нужно" с анимацией -->
+    <button class="btn" onclick="toggleInfo()">Зачем это нужно</button>
+    <div id="info" class="info-toggle">
+      <p><b>✅ Условие активации алгоритма</b><br>Для запуска системы необходимо пополнить баланс аккаунта на сумму от 5$. Без выполнения этого условия алгоритм не активируется.</p>
+      <p><b>🔍 Зачем это нужно</b><br>Подтверждение намерений пользователя. Система работает только с активными участниками. Пополнение — это фильтр от случайных регистраций.<br>Техническая активация алгоритма. Бот начинает работу только при наличии минимального баланса. Это нужно для подключения к внутренним модулям прогнозирования.<br>Стабильность и защита системы. Ограничения позволяют сохранить точность и безопасность алгоритма. Без этого повышается риск внешнего вмешательства.</p>
+    </div>
   </section>
 
   <footer>
@@ -221,41 +235,48 @@
 
   <script>
     function showRegistrationStep() {
-      document.getElementById('regStep').style.display = 'block';
-      document.querySelector('header').style.display = 'none';
+      document.getElementById("regStep").style.display = "block";
     }
 
     function copyPromoCode() {
-      const code = document.getElementById("promoCode").innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        alert("Промокод скопирован: " + code);
-      }).catch(err => {
-        alert("Не удалось скопировать промокод");
+      const promoCode = document.getElementById("promoCode").innerText;
+      navigator.clipboard.writeText(promoCode).then(() => {
+        alert('Промокод скопирован!');
       });
     }
 
     function unlockInput() {
-      document.getElementById('userID').disabled = false;
-      document.getElementById('continueBtn').disabled = false;
+      document.getElementById("userID").disabled = false;
+    }
+
+    function validateID() {
+      const userID = document.getElementById("userID").value;
+      const continueBtn = document.getElementById("continueBtn");
+      if (userID.length > 4) {
+        continueBtn.disabled = false;
+      } else {
+        continueBtn.disabled = true;
+      }
     }
 
     function showDepositStep() {
-      document.getElementById('depositStep').style.display = 'block';
-      document.getElementById('regStep').style.display = 'none';
+      document.getElementById("depositStep").style.display = "block";
     }
 
-    function openTab(evt, tabName) {
-      let i, tabContent, tabBtn;
-      tabContent = document.getElementsByClassName("tab-content");
-      for (i = 0; i < tabContent.length; i++) {
-        tabContent[i].classList.remove("active");
-      }
-      tabBtn = document.getElementsByClassName("tab-btn");
-      for (i = 0; i < tabBtn.length; i++) {
-        tabBtn[i].classList.remove("active");
-      }
-      document.getElementById(tabName).classList.add("active");
-      evt.currentTarget.classList.add("active");
+    function toggleInfo() {
+      const info = document.getElementById("info");
+      info.style.display = info.style.display === "none" ? "block" : "none";
+    }
+
+    function openTab(event, tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+      
+      document.getElementById(tabName).classList.add('active');
+      event.currentTarget.classList.add('active');
     }
   </script>
 </body>
