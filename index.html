@@ -195,7 +195,14 @@
 
   <section class="box" id="regStep" style="display:none">
     <div class="section-title">Регистрация</div>
-    <p>При регистрации используй промокод: <b>LuckyBot777</b></p>
+    <p>При регистрации используй промокод: <b id="promoCode">LuckyBot777</b></p>
+    
+    <!-- Кнопка скопировать промокод -->
+    <button class="btn" onclick="copyPromoCode()">Скопировать промокод</button>
+
+    <!-- Кнопка регистрации -->
+    <a class="btn" href="https://1xbet.com/registration-link" target="_blank">Зарегистрироваться</a>
+
     <p>После регистрации введи свой ID ниже:</p>
     <input type="text" id="userID" placeholder="Введи ID от аккаунта" disabled>
     <button class="btn" onclick="unlockInput()">Я зарегистрировался</button>
@@ -215,33 +222,40 @@
   <script>
     function showRegistrationStep() {
       document.getElementById('regStep').style.display = 'block';
-      window.scrollTo({ top: document.getElementById('regStep').offsetTop, behavior: 'smooth' });
+      document.querySelector('header').style.display = 'none';
+    }
+
+    function copyPromoCode() {
+      const code = document.getElementById("promoCode").innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Промокод скопирован: " + code);
+      }).catch(err => {
+        alert("Не удалось скопировать промокод");
+      });
     }
 
     function unlockInput() {
-      const input = document.getElementById('userID');
-      const button = document.getElementById('continueBtn');
-      input.disabled = false;
-      input.focus();
-      input.addEventListener('input', () => {
-        button.disabled = input.value.trim() === '';
-      });
+      document.getElementById('userID').disabled = false;
+      document.getElementById('continueBtn').disabled = false;
     }
 
     function showDepositStep() {
       document.getElementById('depositStep').style.display = 'block';
-      window.scrollTo({ top: document.getElementById('depositStep').offsetTop, behavior: 'smooth' });
+      document.getElementById('regStep').style.display = 'none';
     }
 
-    function openTab(evt, tabId) {
-      const tabs = document.querySelectorAll('.tab-content');
-      const buttons = document.querySelectorAll('.tab-btn');
-
-      tabs.forEach(tab => tab.classList.remove('active'));
-      buttons.forEach(btn => btn.classList.remove('active'));
-
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
+    function openTab(evt, tabName) {
+      let i, tabContent, tabBtn;
+      tabContent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].classList.remove("active");
+      }
+      tabBtn = document.getElementsByClassName("tab-btn");
+      for (i = 0; i < tabBtn.length; i++) {
+        tabBtn[i].classList.remove("active");
+      }
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
     }
   </script>
 </body>
