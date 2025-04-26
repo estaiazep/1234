@@ -11,12 +11,9 @@
       --bg: #0a0a0a;
       --text: #ffffff;
       --card-bg: #111;
+      --trust-bg: linear-gradient(145deg, #0f0f0f, #1a1a1a);
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
       font-family: 'Orbitron', sans-serif;
       background: var(--bg);
@@ -26,121 +23,32 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-    header, footer {
-      text-align: center;
-      padding: 20px;
-      position: relative;
-      animation: fadeInDown 1s ease;
-    }
-    header h1 {
-      font-size: 2.5em;
-      color: var(--accent);
-      margin: 0;
-    }
-    .start-btn-header {
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      animation: pulse 2s infinite;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      animation: fadeIn 1.5s ease;
-    }
-    nav button {
-      background: var(--card-bg);
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: all 0.3s ease;
-    }
-    nav button:hover { transform: scale(1.1); }
-    nav button.active { background: var(--accent); color: #000; }
-    main {
-      flex: 1;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeInUp 1s ease;
-    }
-    section {
-      max-width: 450px;
-      width: 100%;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
-    section.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    button, input {
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      font-size: 1em;
-      border: none;
-      border-radius: 8px;
-    }
-    button {
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #00cccc;
-    }
-    input {
-      background: #222;
-      color: var(--text);
-    }
-    ul { padding-left: 20px; }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.1); }
-    }
-    @media (max-width: 480px) {
-      header h1 { font-size: 2em; }
-      .start-btn-header {
-        top: 10px;
-        right: 10px;
-        transform: none;
-      }
-      section { padding: 15px; }
-    }
+    header, footer {text-align: center; padding: 20px; position: relative; animation: fadeInDown 1s ease;}
+    header h1 {font-size: 2.5em; color: var(--accent); margin: 0;}
+    .start-btn-header {position: absolute; top: 50%; right: 20px; transform: translateY(-50%); background: var(--accent); color: #000; border: none; padding: 10px 20px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1em; animation: pulse 2s infinite;}
+    nav {display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; animation: fadeIn 1.5s ease;}
+    nav button {background: var(--card-bg); color: var(--accent); border: 1px solid var(--accent); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 1em; transition: all 0.3s ease;}
+    nav button:hover {transform: scale(1.1);}
+    nav button.active {background: var(--accent); color: #000;}
+    main {flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; animation: fadeInUp 1s ease;}
+    section {max-width: 450px; width: 100%; background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; display: none; opacity: 0; transform: translateY(20px); transition: all 0.6s ease;}
+    section.active {display: block; opacity: 1; transform: translateY(0);}
+    .trust-section, .reviews-section {background: var(--trust-bg); border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin: 20px 0; animation: fadeInUp 1.2s ease;}
+    .trust-section h3, .reviews-section h3 {color: var(--accent); margin-bottom: 15px;}
+    .trust-icons {display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;}
+    .trust-icons div {background: #1c1c1c; border: 1px solid var(--accent); border-radius: 10px; padding: 10px; text-align: center; width: 100px;}
+    .review-card {background: #1b1b1b; padding: 15px; border-radius: 10px; margin-top: 10px; animation: fadeIn 1s ease;}
+    .review-card p {font-size: 0.9em;}
+    .review-card span {font-size: 0.8em; color: #aaa;}
+    button, input {width: 100%; margin: 10px 0; padding: 12px; font-size: 1em; border: none; border-radius: 8px;}
+    button {background: var(--accent); color: #000; font-weight: bold; cursor: pointer; transition: background 0.3s;}
+    button:hover {background: #00cccc;}
+    input {background: #222; color: var(--text);}
+    ul {padding-left: 20px;}
+    @keyframes fadeInUp {from {opacity: 0; transform: translateY(40px);} to {opacity: 1; transform: translateY(0);}}
+    @keyframes fadeInDown {from {opacity: 0; transform: translateY(-40px);} to {opacity: 1; transform: translateY(0);}}
+    @keyframes pulse {0%, 100% {transform: translateY(-50%) scale(1);} 50% {transform: translateY(-50%) scale(1.1);}}
+    @media (max-width: 480px) {header h1 {font-size: 2em;} .start-btn-header {top: 10px; right: 10px; transform: none;} section {padding: 15px;}}
   </style>
 </head>
 <body>
@@ -181,6 +89,31 @@
       <h2>Ограничения (ФМО)</h2>
       <p>Мы принимаем не более 50 новых пользователей в неделю. Это делается для защиты алгоритма от утечек и снижения нагрузки на систему. Спешите занять место!</p>
     </section>
+
+    <div class="trust-section">
+      <h3>Почему нам доверяют?</h3>
+      <div class="trust-icons">
+        <div>Работаем с 2022</div>
+        <div>1200+ клиентов</div>
+        <div>Поддержка 24/7</div>
+      </div>
+    </div>
+
+    <div class="reviews-section">
+      <h3>Отзывы пользователей</h3>
+      <div class="review-card">
+        <p>"Бот реально помогает! Начал выигрывать стабильно уже на второй день."</p>
+        <span>— Андрей, Москва</span>
+      </div>
+      <div class="review-card">
+        <p>"Очень доволен! Спасибо за качественную поддержку и честную работу!"</p>
+        <span>— Ирина, Казань</span>
+      </div>
+      <div class="review-card">
+        <p>"Сомневался, но всё оказалось честно. Пополнил — получил доступ."</p>
+        <span>— Сергей, СПб</span>
+      </div>
+    </div>
 
     <section id="registrationScreen">
       <h2>Регистрация</h2>
