@@ -3,266 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINES HACK BOT</title>
+  <title>MINES HACK BOT - Старт</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --neon-color: #00ffee;
-      --bg-dark: #0a0a0a;
-      --text-main: #ffffff;
-      --box-bg: #121212;
-      --btn-hover: #00bbcc;
-      --btn-shadow: #00ffee44;
+      --accent: #00ffee;
+      --bg: #0a0a0a;
+      --text: #ffffff;
+      --card-bg: #111;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      transition: all 0.3s ease;
     }
-
     body {
       font-family: 'Orbitron', sans-serif;
-      background: url('35AB2930-3E73-488C-93C3-54073AF81F21.PNG') no-repeat center fixed;
-      background-size: cover;
-      color: var(--text-main);
-      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       overflow-x: hidden;
     }
-
-    header {
-      background: rgba(0, 255, 238, 0.2);
+    header, footer {
       text-align: center;
-      padding: 80px 20px;
-      box-shadow: inset 0 0 30px var(--neon-color);
-      animation: fadeInUp 1s ease-out;
+      padding: 20px;
+      position: relative;
+      animation: fadeInDown 1s ease;
     }
-
-    h1 {
-      font-size: 4em;
-      color: var(--neon-color);
-      text-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
-      margin-bottom: 20px;
-      animation: neonGlow 1.5s infinite alternate;
+    header h1 {
+      font-size: 2.5em;
+      color: var(--accent);
+      margin: 0;
     }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      animation: fadeIn 1.5s ease-out;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: var(--neon-color);
+    .start-btn-header {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: var(--accent);
       color: #000;
-      padding: 15px 35px;
-      border-radius: 10px;
+      border: none;
+      padding: 10px 20px;
       font-weight: bold;
-      text-decoration: none;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 1.2em;
-      box-shadow: 0 0 15px var(--neon-color);
-      transition: 0.3s;
+      font-size: 1em;
+      animation: pulse 2s infinite;
     }
-
-    .btn:hover {
-      background: var(--btn-hover);
-      box-shadow: 0 0 25px var(--btn-hover);
-    }
-
-    .tabs {
+    nav {
       display: flex;
-      gap: 20px;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 20px;
       flex-wrap: wrap;
+      animation: fadeIn 1.5s ease;
     }
-
-    .tab-btn {
-      padding: 15px 30px;
-      background: #1f1f1f;
-      border: 1px solid var(--neon-color);
-      color: var(--neon-color);
+    nav button {
+      background: var(--card-bg);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+    nav button:hover { transform: scale(1.1); }
+    nav button.active { background: var(--accent); color: #000; }
+    main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInUp 1s ease;
+    }
+    section {
+      max-width: 450px;
+      width: 100%;
+      background: var(--card-bg);
+      padding: 20px;
       border-radius: 12px;
-      cursor: pointer;
-      font-size: 1.1em;
-      transition: all 0.4s ease;
-      transform: scale(1);
-    }
-
-    .tab-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .tab-btn.active {
-      background: var(--neon-color);
-      color: #000;
-    }
-
-    .tab-content {
+      margin-bottom: 20px;
       display: none;
-      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
     }
-
-    .tab-content.active {
+    section.active {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    button, input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes neonGlow {
-      0% {
-        text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 15px var(--neon-color);
-      }
-
-      100% {
-        text-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color), 0 0 30px var(--neon-color);
-      }
-    }
-
-    .info-toggle {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.2em;
-      line-height: 1.6;
-      animation: fadeIn 0.5s ease;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 0.9em;
-      color: #888;
-      background: rgba(0, 0, 0, 0.7);
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .lang-switcher {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 100;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .lang-switcher select {
-      background: #000;
-      color: var(--neon-color);
-      border: 1px solid var(--neon-color);
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 1.1em;
+    button {
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
+      transition: background 0.3s;
     }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header {
-        padding: 50px 20px;
+    button:hover {
+      background: #00cccc;
+    }
+    input {
+      background: #222;
+      color: var(--text);
+    }
+    ul { padding-left: 20px; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.1); }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 2em; }
+      .start-btn-header {
+        top: 10px;
+        right: 10px;
+        transform: none;
       }
-
-      .tab-btn {
-        padding: 10px 20px;
-      }
-
-      .tab-content {
-        font-size: 1em;
-      }
+      section { padding: 15px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="lang-switcher">
-    <select>
-      <option value="ru">Русский</option>
-      <option value="th">ไทย</option>
-      <option value="vi">Tiếng Việt</option>
-    </select>
-  </div>
-
   <header>
     <h1>MINES HACK BOT</h1>
-    <p>Алгоритм, который взламывает игру MINES. Максимум — за вами 💸</p>
-    <button class="btn" onclick="showRegistrationStep()">Начать сейчас</button>
+    <button class="start-btn-header" onclick="startRegistration()">Начать</button>
   </header>
 
-  <section class="box">
-    <div class="section-title">Информация</div>
-    <div class="tabs">
-      <button class="tab-btn active" onclick="openTab(event, 'bot')">О боте</button>
-      <button class="tab-btn" onclick="openTab(event, 'advantages')">Преимущества</button>
-      <button class="tab-btn" onclick="openTab(event, 'how')">Как работает</button>
-      <button class="tab-btn" onclick="openTab(event, 'limits')">Ограничения</button>
-    </div>
-    <div id="bot" class="tab-content active">
-      <p><b>MINES HACK BOT</b> — это интеллектуальный алгоритм, разработанный для точного предсказания безопасных клеток в игре MINES. Основан на анализе исторических данных, паттернов поведения и случайных чисел. Не требует знаний или опыта.</p>
-    </div>
-    <div id="advantages" class="tab-content">
+  <nav>
+    <button onclick="showTab('advantages')" class="active">Преимущества</button>
+    <button onclick="showTab('info')">Информация</button>
+    <button onclick="showTab('limits')">Ограничения (ФМО)</button>
+  </nav>
+
+  <main>
+    <section id="startScreen" class="active">
+      <h2>Начало работы</h2>
+      <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
+      <button onclick="startRegistration()">Начать сейчас</button>
+    </section>
+
+    <section id="advantages">
+      <h2>Преимущества Бота</h2>
       <ul>
-        <li>🎯 Высокая точность — до 90% успешных ходов</li>
-        <li>🚀 Быстрый старт — достаточно 5$ на балансе</li>
-        <li>🔐 Приватный доступ — доступ ограничен</li>
-        <li>📈 Гарантированный рост капитала при дисциплине</li>
+        <li>⚡ Высокая точность предсказаний</li>
+        <li>🚀 Быстрые сигналы в реальном времени</li>
+        <li>🔒 Защита от блокировок</li>
+        <li>💵 Стабильный рост баланса при дисциплине</li>
       </ul>
-    </div>
-    <div id="how" class="tab-content">
-      <ol>
-        <li>Проходишь регистрацию и указываешь промокод <b>LuckyBot777</b></li>
-        <li>Создаёшь аккаунт и получаешь ID</li>
-        <li>Вводишь ID на сайте</li>
-        <li>Пополняешь аккаунт минимум на 5$</li>
-        <li>Запускается бот, ты получаешь подсказки в реальном времени</li>
-      </ol>
-    </div>
-    <div id="limits" class="tab-content">
-      <p>⚠️ ВНИМАНИЕ! ⚠️ Мы принимаем только 50 новых пользователей в неделю. Это правило обязательное и не подлежит изменению!❗️ Почему? Чтобы наш алгоритм работал без сбоев и не был раскрыт системой. Это строгое ограничение, которое гарантирует стабильность и эффективность работы — больше не сможем принимать.⏳ Время ограничено! Если не успел — жди следующей недели. У нас не терпится помогать только тем, кто готов действовать сейчас!🔴 Поспеши! Места заканчиваются! ⏰</p>
-    </div>
-  </section>
+    </section>
+
+    <section id="info">
+      <h2>Как работает бот</h2>
+      <p>Наш бот анализирует поведение системы MINES, изучает паттерны случайных чисел и выдаёт сигналы для безопасной игры. Всё работает автоматически — без необходимости иметь опыт или знания.</p>
+    </section>
+
+    <section id="limits">
+      <h2>Ограничения (ФМО)</h2>
+      <p>Мы принимаем не более 50 новых пользователей в неделю. Это делается для защиты алгоритма от утечек и снижения нагрузки на систему. Спешите занять место!</p>
+    </section>
+
+    <section id="registrationScreen">
+      <h2>Регистрация</h2>
+      <button onclick="goToSite()">Перейти на сайт регистрации</button>
+      <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
+      <input type="text" id="userId" placeholder="Введите ваш ID">
+      <button onclick="confirmRegistration()">Я зарегистрировался</button>
+    </section>
+
+    <section id="depositScreen">
+      <h2>Депозит 5$</h2>
+      <p>Для активации бота необходимо внести депозит:</p>
+      <ul>
+        <li>✅ Активация сигналов</li>
+        <li>✅ Защита аккаунта от удаления</li>
+        <li>✅ Доступ в привилегированную группу</li>
+      </ul>
+      <p>Без депозита бот работать не будет! Это необходимо для вашей же выгоды.</p>
+      <button onclick="goToDeposit()">Пополнить баланс</button>
+    </section>
+
+    <section id="finalScreen">
+      <h2>Доступ активирован!</h2>
+      <p>Поздравляем! Ваш бот активирован. Ожидайте сигналы для игры MINES.</p>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 MINES HACK BOT. Все права защищены.</p>
+    <p>&copy; 2025 MINES HACK BOT</p>
   </footer>
 
   <script>
-    function openTab(evt, tabName) {
-      let tabcontent = document.querySelectorAll('.tab-content');
-      tabcontent.forEach(content => content.classList.remove('active'));
-      let tabbuttons = document.querySelectorAll('.tab-btn');
-      tabbuttons.forEach(button => button.classList.remove('active'));
-
-      document.getElementById(tabName).classList.add('active');
-      evt.currentTarget.classList.add('active');
+    function showTab(tabId) {
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
     }
 
-    function showRegistrationStep() {
-      alert("Регистрируйтесь и начинайте прямо сейчас!");
+    function startRegistration() {
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('registrationScreen').classList.add('active');
+      document.getElementById('registrationScreen').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function goToSite() {
+      window.open('https://example.com/register', '_blank');
+    }
+
+    function copyPromoCode() {
+      navigator.clipboard.writeText('ХАЧИ').then(() => {
+        alert('Промокод скопирован! Используйте его при регистрации.');
+      });
+    }
+
+    function confirmRegistration() {
+      const userId = document.getElementById('userId').value.trim();
+      if (userId.length < 3) {
+        alert('Введите корректный ID.');
+        return;
+      }
+      document.getElementById('registrationScreen').classList.remove('active');
+      document.getElementById('depositScreen').classList.add('active');
+      document.getElementById('depositScreen').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function goToDeposit() {
+      window.open('https://example.com/deposit', '_blank');
+      setTimeout(() => {
+        document.getElementById('depositScreen').classList.remove('active');
+        document.getElementById('finalScreen').classList.add('active');
+        document.getElementById('finalScreen').scrollIntoView({ behavior: 'smooth' });
+      }, 1000);
     }
   </script>
 </body>
