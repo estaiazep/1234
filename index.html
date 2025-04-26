@@ -49,7 +49,7 @@
     @keyframes fadeInDown {from {opacity: 0; transform: translateY(-40px);} to {opacity: 1; transform: translateY(0);}}
     @keyframes pulse {0%, 100% {transform: scale(1);} 50% {transform: scale(1.1);}}
     @keyframes popupFadeIn {from {opacity: 0; transform: scale(0.8);} to {opacity: 1; transform: scale(1);}}
-    #confirmationPopup {
+    #confirmationPopup, #errorPopup {
       display: none;
       position: fixed;
       top: 0; left: 0;
@@ -57,128 +57,131 @@
       background: rgba(10, 10, 10, 0.6);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
-      display: flex; align-items: center; justify-content: center;
+      align-items: center; justify-content: center;
       z-index: 1000;
     }
     @media (max-width: 480px) {header h1 {font-size: 2em;} .start-btn-header {margin-top: 10px;} section {padding: 15px;}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>MINES HACK BOT</h1>
-    <button class="start-btn-header" onclick="startRegistration()">Начать</button>
-  </header>
+<header>
+  <h1>MINES HACK BOT</h1>
+  <button class="start-btn-header" onclick="startRegistration()">Начать</button>
+</header>
 
-  <nav>
-    <button onclick="showTab('advantages')" class="active">Преимущества</button>
-    <button onclick="showTab('info')">Информация</button>
-    <button onclick="showTab('limits')">Ограничения (ФМО)</button>
-  </nav>
+<nav>
+  <button onclick="showTab('advantages')" class="active">Преимущества</button>
+  <button onclick="showTab('info')">Информация</button>
+  <button onclick="showTab('limits')">Ограничения (ФМО)</button>
+  <button onclick="showTab('bots')">Боты</button>
+</nav>
 
-  <main>
-    <section id="startScreen" class="active">
-      <h2>Начало работы</h2>
-      <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
-      <button onclick="startRegistration()">Начать сейчас</button>
-    </section>
+<main>
+<section id="startScreen" class="active">
+  <h2>Начало работы</h2>
+  <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
+  <button onclick="startRegistration()">Начать сейчас</button>
+</section>
 
-    <section id="advantages">
-      <h2>Преимущества Бота</h2>
-      <ul>
-        <li>⚡ Высокая точность предсказаний</li>
-        <li>🚀 Быстрые сигналы в реальном времени</li>
-        <li>🔒 Защита от блокировок</li>
-        <li>💵 Стабильный рост баланса при дисциплине</li>
-      </ul>
-    </section>
+<section id="advantages">
+  <h2>Преимущества Бота</h2>
+  <ul>
+    <li>⚡ Высокая точность предсказаний</li>
+    <li>🚀 Быстрые сигналы в реальном времени</li>
+    <li>🔒 Защита от блокировок</li>
+    <li>💵 Стабильный рост баланса при дисциплине</li>
+  </ul>
+</section>
 
-    <section id="info">
-      <h2>Как работает бот</h2>
-      <p>Наш бот анализирует поведение системы MINES, изучает паттерны случайных чисел и выдаёт сигналы для безопасной игры. Всё работает автоматически — без необходимости иметь опыт или знания.</p>
-    </section>
+<section id="info">
+  <h2>Как работает бот</h2>
+  <p>Наш бот анализирует поведение системы MINES, изучает паттерны случайных чисел и выдаёт сигналы для безопасной игры. Всё работает автоматически — без необходимости иметь опыт или знания.</p>
+</section>
 
-    <section id="limits">
-      <h2>Ограничения (ФМО)</h2>
-      <p>Мы принимаем не более 50 новых пользователей в неделю. Это делается для защиты алгоритма от утечек и снижения нагрузки на систему. Спешите занять место!</p>
-    </section>
+<section id="limits">
+  <h2>Ограничения (ФМО)</h2>
+  <p>Мы принимаем не более 50 новых пользователей в неделю. Это делается для защиты алгоритма от утечек и снижения нагрузки на систему. Спешите занять место!</p>
+</section>
 
-    <div class="trust-section">
-      <h3>Почему нам доверяют?</h3>
-      <div class="trust-icons">
-        <div>Работаем с 2022</div>
-        <div>1200+ клиентов</div>
-        <div>Поддержка 24/7</div>
-      </div>
-    </div>
+<section id="bots">
+  <h2>Доступные Боты</h2>
+  <button onclick="showErrorPopup()">Открыть бот MINES</button>
+  <button onclick="showErrorPopup()">Открыть бот AVIATOR</button>
+</section>
 
-    <div class="reviews-section">
-      <h3>Отзывы пользователей</h3>
-      <div class="review-card">
-        <p>"Бот реально помогает! Начал выигрывать стабильно уже на второй день."</p>
-        <span>— Андрей, Москва</span>
-      </div>
-      <div class="review-card">
-        <p>"Очень доволен! Спасибо за качественную поддержку и честную работу!"</p>
-        <span>— Ирина, Казань</span>
-      </div>
-      <div class="review-card">
-        <p>"Сомневался, но всё оказалось честно. Пополнил — получил доступ."</p>
-        <span>— Сергей, СПб</span>
-      </div>
-    </div>
+<section id="registrationScreen">
+  <h2>Регистрация</h2>
+  <button onclick="goToSite()">Перейти на сайт регистрации</button>
+  <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
+  <button onclick="confirmRegistration()">Я зарегистрировался</button>
+</section>
 
-    <section id="registrationScreen">
-      <h2>Регистрация</h2>
-      <button onclick="goToSite()">Перейти на сайт регистрации</button>
-      <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
-      <button onclick="confirmRegistration()">Я зарегистрировался</button>
-    </section>
+<div id="confirmationPopup">
+  <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; text-align: center; max-width: 90%; animation: popupFadeIn 0.5s ease;">
+    <h2 style="color: var(--accent); margin-bottom: 20px;">Отлично!</h2>
+    <p style="margin-bottom: 10px;">Теперь отправьте скриншот вашего аккаунта.</p>
+    <p>В Telegram: <strong>@ThanawatOfficial</strong></p>
+    <button onclick="closePopup()" style="margin-top: 20px;">Хорошо</button>
+  </div>
+</div>
 
-    <div id="confirmationPopup">
-      <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; text-align: center; max-width: 90%; animation: popupFadeIn 0.5s ease;">
-        <h2 style="color: var(--accent); margin-bottom: 20px;">Отлично!</h2>
-        <p style="margin-bottom: 10px;">Теперь отправьте скриншот вашего аккаунта.</p>
-        <p>В Telegram: <strong>@ThanawatOfficial</strong></p>
-        <button onclick="closePopup()" style="margin-top: 20px;">Хорошо</button>
-      </div>
-    </div>
-  </main>
+<div id="errorPopup">
+  <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; text-align: center; max-width: 90%; animation: popupFadeIn 0.5s ease;">
+    <h2 style="color: var(--accent); margin-bottom: 20px;">Ошибка доступа</h2>
+    <p style="margin-bottom: 10px;">У вас нет доступа для активации. Пройдите регистрацию и отправьте скриншот на проверку.</p>
+    <p>В Telegram: <strong>@ThanawatOfficial</strong></p>
+    <button onclick="closeErrorPopup()" style="margin-top: 20px;">Понятно</button>
+  </div>
+</div>
+</main>
 
-  <footer>
-    <p>&copy; 2025 MINES HACK BOT</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 MINES HACK BOT</p>
+</footer>
 
-  <script>
-    function showTab(tabId) {
-      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-    }
+<script>
+function showTab(tabId) {
+  document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
 
-    function startRegistration() {
-      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById('registrationScreen').classList.add('active');
-      document.getElementById('registrationScreen').scrollIntoView({ behavior: 'smooth' });
-    }
+function startRegistration() {
+  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById('registrationScreen').classList.add('active');
+  document.getElementById('registrationScreen').scrollIntoView({ behavior: 'smooth' });
+}
 
-    function goToSite() {
-      window.open('https://example.com/register', '_blank');
-    }
+function goToSite() {
+  window.open('https://example.com/register', '_blank');
+}
 
-    function copyPromoCode() {
-      navigator.clipboard.writeText('ХАЧИ').then(() => {
-        alert('Промокод скопирован! Используйте его при регистрации.');
-      });
-    }
+function copyPromoCode() {
+  navigator.clipboard.writeText('ХАЧИ').then(() => {
+    alert('Промокод скопирован! Используйте его при регистрации.');
+  });
+}
 
-    function confirmRegistration() {
-      document.getElementById('confirmationPopup').style.display = 'flex';
-    }
+function confirmRegistration() {
+  document.getElementById('confirmationPopup').style.display = 'flex';
+}
 
-    function closePopup() {
-      document.getElementById('confirmationPopup').style.display = 'none';
-    }
-  </script>
+function closePopup() {
+  document.getElementById('confirmationPopup').style.display = 'none';
+}
+
+function showErrorPopup() {
+  document.getElementById('errorPopup').style.display = 'flex';
+  setTimeout(() => {
+    closeErrorPopup();
+  }, 5000);
+}
+
+function closeErrorPopup() {
+  document.getElementById('errorPopup').style.display = 'none';
+}
+</script>
+
 </body>
 </html>
