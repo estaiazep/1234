@@ -21,7 +21,8 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-      position: relative;
+      display: flex;
+      flex-direction: column;
     }
     header, footer {
       text-align: center;
@@ -35,22 +36,23 @@
       font-size: 3em;
       color: var(--accent);
       text-shadow: 0 0 10px var(--accent-secondary);
-      margin-bottom: 10px;
+      margin-bottom: 0;
     }
     main {
       flex: 1;
-      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 20px 20px 40px 20px;
       animation: fadeInUp 1s ease;
     }
     section {
       background: rgba(2,16,23,0.8);
       border: 2px solid var(--accent);
       border-radius: 20px;
-      padding: 30px 20px;
+      padding: 25px 20px;
       width: 90%;
       max-width: 600px;
       box-shadow: var(--border-glow);
@@ -58,7 +60,8 @@
       visibility: hidden;
       height: 0;
       overflow: hidden;
-      transition: all 0.6s ease;
+      transition: all 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px);
     }
     section.active {
       opacity: 1;
@@ -68,7 +71,7 @@
       transform: translateY(0);
     }
     section h2 {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       font-size: 2em;
       color: var(--accent-secondary);
     }
@@ -112,23 +115,6 @@
       color: var(--text);
       border: 1px solid var(--accent);
     }
-    .progress-bar {
-      width: 100%;
-      background-color: #02202b;
-      border-radius: 30px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
-    .progress {
-      height: 20px;
-      width: 0;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
-      animation: progressAnimation 4s forwards;
-    }
-    @keyframes progressAnimation {
-      from { width: 0; }
-      to { width: 100%; }
-    }
     footer p {
       font-size: 0.9em;
       color: var(--accent-secondary);
@@ -168,76 +154,56 @@
       from {opacity: 0; transform: scale(0.8);}
       to {opacity: 1; transform: scale(1);}
     }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
   </style>
 </head>
 <body>
-
 <header>
   <h1>MINES HACK BOT</h1>
 </header>
-
 <main>
-  <section id="startScreen" class="active">
-    <h2>Начало работы</h2>
-    <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
-    <button onclick="startRegistration()">Начать</button>
-  </section>
-
-  <section id="advantages" class="active">
-    <h2>Преимущества</h2>
-    <ul>
-      <li>Высокая точность предсказаний</li>
-      <li>Быстрые сигналы в реальном времени</li>
-      <li>Защита от блокировок</li>
-      <li>Стабильный рост баланса при дисциплине</li>
-    </ul>
-  </section>
-
-  <section id="info" class="active">
-    <h2>Как работает бот</h2>
-    <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
-  </section>
-
-  <section id="limits" class="active">
-    <h2>Ограничения</h2>
-    <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
-  </section>
-
-  <section id="bots" class="active">
-    <h2>Боты</h2>
-    <ul>
-      <li>MINES Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
-      <li>AVIATOR Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
-    </ul>
-  </section>
-
-  <section id="registrationScreen">
-    <h2>Регистрация</h2>
-    <p>Чтобы получить доступ к нашему боту, необходимо зарегистрироваться на сайте нашего партнёра и внести минимальный депозит. Это требуется для активации вашего аккаунта и получения сигналов от бота. Следуйте инструкциям ниже:</p>
-    <div class="progress-bar">
-      <div class="progress"></div>
-    </div>
-    <ul>
-      <li>Перейдите на сайт регистрации</li>
-      <li>Создайте аккаунт, используя промокод "ХАЧИ"</li>
-      <li>Внесите депозит</li>
-      <li>Отправьте скриншот вашего аккаунта для активации</li>
-    </ul>
-    <button onclick="goToSite()">Перейти на сайт регистрации</button>
-    <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
-    <button onclick="confirmRegistration()">Я зарегистрировался</button>
-    <button onclick="backToStart()">Назад</button>
-  </section>
+<!-- секции как есть -->
+<section id="startScreen" class="active">
+  <h2>Начало работы</h2>
+  <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
+  <button onclick="startRegistration()">Начать</button>
+</section>
+<section id="advantages" class="active">
+  <h2>Преимущества</h2>
+  <ul>
+    <li>Высокая точность предсказаний</li>
+    <li>Быстрые сигналы в реальном времени</li>
+    <li>Защита от блокировок</li>
+    <li>Стабильный рост баланса при дисциплине</li>
+  </ul>
+</section>
+<section id="info" class="active">
+  <h2>Как работает бот</h2>
+  <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
+</section>
+<section id="limits" class="active">
+  <h2>Ограничения</h2>
+  <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
+</section>
+<section id="bots" class="active">
+  <h2>Боты</h2>
+  <ul>
+    <li>MINES Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
+    <li>AVIATOR Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
+  </ul>
+</section>
+<section id="registrationScreen">
+  <h2>Регистрация</h2>
+  <p>Чтобы получить доступ к нашему боту, зарегистрируйтесь на сайте партнёра с промокодом "ХАЧИ" и сделайте депозит. Это активирует ваш аккаунт и откроет доступ к сигналам бота.</p>
+  <button onclick="goToSite()">Перейти на сайт регистрации</button>
+  <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
+  <button onclick="confirmRegistration()">Я зарегистрировался</button>
+  <button onclick="backToStart()">Назад</button>
+</section>
 </main>
-
+<!-- попапы -->
 <div id="confirmationPopup">
   <div class="popup-content">
-    <h2 style="color: var(--accent); margin-bottom: 20px;">Отлично!</h2>
+    <h2>Отлично!</h2>
     <p>Отправьте скриншот вашего аккаунта.</p>
     <a href="https://t.me/ThanawatOfficial" target="_blank">
       <button>Отправить скриншот</button>
@@ -245,60 +211,55 @@
     <button onclick="closePopup()">Назад</button>
   </div>
 </div>
-
 <div id="errorPopup">
   <div class="popup-content">
-    <h2 style="color: var(--accent); margin-bottom: 20px;">Ошибка доступа</h2>
-    <p>Нет доступа для активации. Следуйте инструкциям и получите доступ.</p>
+    <h2>Ошибка доступа</h2>
+    <p>Нет доступа для активации. Следуйте инструкциям для получения доступа.</p>
     <button onclick="closeErrorPopup()">Назад</button>
   </div>
 </div>
-
 <footer>
   <p>&copy; 2025 MINES HACK BOT</p>
 </footer>
-
 <script>
 function startRegistration() {
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById('registrationScreen').classList.add('active');
+  document.querySelector('main').style.justifyContent = 'center'; // Центрируем регистрацию
 }
-
 function backToStart() {
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById('startScreen').classList.add('active');
+  document.getElementById('advantages').classList.add('active');
+  document.getElementById('info').classList.add('active');
+  document.getElementById('limits').classList.add('active');
+  document.getElementById('bots').classList.add('active');
+  document.querySelector('main').style.justifyContent = 'flex-start'; // Возвращаем наверх
 }
-
 function goToSite() {
   window.open('https://example.com/register', '_blank');
 }
-
 function copyPromoCode() {
   navigator.clipboard.writeText('ХАЧИ').then(() => {
     alert('Промокод скопирован!');
   });
 }
-
 function confirmRegistration() {
   document.getElementById('confirmationPopup').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function closePopup() {
   document.getElementById('confirmationPopup').classList.remove('active');
   document.body.style.overflow = '';
 }
-
 function showErrorPopup() {
   document.getElementById('errorPopup').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function closeErrorPopup() {
   document.getElementById('errorPopup').classList.remove('active');
   document.body.style.overflow = '';
 }
 </script>
-
 </body>
 </html>
