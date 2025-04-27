@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINES HACK BOT - Старт</title>
+  <title>MINES HACK BOT - Start</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -161,61 +161,59 @@
   <h1>MINES HACK BOT</h1>
 </header>
 <main>
-<!-- секции как есть -->
 <section id="startScreen" class="active">
-  <h2>Начало работы</h2>
-  <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
-  <button onclick="startRegistration()">Начать</button>
+  <h2>เริ่มต้น</h2>
+  <p>เรียนรู้วิธีชนะในเกม MINES อย่างง่ายดายด้วยบอทของเรา!</p>
+  <button onclick="startRegistration()">เริ่มต้น</button>
 </section>
 <section id="advantages" class="active">
-  <h2>Преимущества</h2>
+  <h2>ข้อดี</h2>
   <ul>
-    <li>Высокая точность предсказаний</li>
-    <li>Быстрые сигналы в реальном времени</li>
-    <li>Защита от блокировок</li>
-    <li>Стабильный рост баланса при дисциплине</li>
+    <li>ความแม่นยำในการทำนายสูง</li>
+    <li>สัญญาณรวดเร็วแบบเรียลไทม์</li>
+    <li>ป้องกันการถูกบล็อก</li>
+    <li>เพิ่มยอดคงเหลืออย่างมั่นคงเมื่อปฏิบัติตามวินัย</li>
   </ul>
 </section>
 <section id="info" class="active">
-  <h2>Как работает бот</h2>
-  <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
+  <h2>บอททำงานอย่างไร</h2>
+  <p>บอทวิเคราะห์พฤติกรรมของระบบ MINES และให้สัญญาณที่แม่นยำสำหรับการชนะ โดยอัตโนมัติไม่ต้องมีประสบการณ์!</p>
 </section>
 <section id="limits" class="active">
-  <h2>Ограничения</h2>
-  <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
+  <h2>ข้อจำกัด</h2>
+  <p>จำกัดผู้ใช้ใหม่ 50 คนต่อสัปดาห์ เพื่อปกป้องอัลกอริธึมของเรา</p>
 </section>
 <section id="bots" class="active">
-  <h2>Боты</h2>
+  <h2>บอท</h2>
   <ul>
-    <li>MINES Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
-    <li>AVIATOR Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
+    <li>MINES Bot: <button onclick="showErrorPopup()">เปิดบอท</button></li>
+    <li>AVIATOR Bot: <button onclick="showErrorPopup()">เปิดบอท</button></li>
   </ul>
 </section>
 <section id="registrationScreen">
-  <h2>Регистрация</h2>
-  <p>Чтобы получить доступ к нашему боту, зарегистрируйтесь на сайте партнёра с промокодом "ХАЧИ" и сделайте депозит. Это активирует ваш аккаунт и откроет доступ к сигналам бота.</p>
-  <button onclick="goToSite()">Перейти на сайт регистрации</button>
-  <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
-  <button onclick="confirmRegistration()">Я зарегистрировался</button>
-  <button onclick="backToStart()">Назад</button>
+  <h2>การลงทะเบียน</h2>
+  <p>หากต้องการเข้าถึงบอทของเรา กรุณาลงทะเบียนบนเว็บไซต์โดยใช้รหัสโปรโมชั่น LuckyBot777 เพื่อเปิดใช้งานบัญชีของคุณและเข้าถึงสัญญาณบอท จำนวนจำกัด รีบเริ่มตอนนี้!</p>
+  <button onclick="goToSite()">ไปที่เว็บไซต์ลงทะเบียน</button>
+  <button onclick="copyPromoCode()">คัดลอกรหัสโปรโมชั่น: LuckyBot777</button>
+  <button onclick="confirmRegistration()">ฉันได้ลงทะเบียนแล้ว</button>
+  <button onclick="backToStart()">กลับ</button>
 </section>
 </main>
-<!-- попапы -->
 <div id="confirmationPopup">
   <div class="popup-content">
-    <h2>Отлично!</h2>
-    <p>Отправьте скриншот вашего аккаунта.</p>
+    <h2>สำเร็จ!</h2>
+    <p>กรุณาส่งภาพหน้าจอบัญชีของคุณ</p>
     <a href="https://t.me/ThanawatOfficial" target="_blank">
-      <button>Отправить скриншот</button>
+      <button>ส่งภาพหน้าจอ</button>
     </a>
-    <button onclick="closePopup()">Назад</button>
+    <button onclick="closePopup()">กลับ</button>
   </div>
 </div>
 <div id="errorPopup">
   <div class="popup-content">
-    <h2>Ошибка доступа</h2>
-    <p>Нет доступа для активации. Следуйте инструкциям для получения доступа.</p>
-    <button onclick="closeErrorPopup()">Назад</button>
+    <h2>ข้อผิดพลาดในการเข้าถึง</h2>
+    <p>ไม่สามารถเข้าถึงได้ กรุณาทำตามคำแนะนำเพื่อเปิดใช้งานการเข้าถึง</p>
+    <button onclick="closeErrorPopup()">กลับ</button>
   </div>
 </div>
 <footer>
@@ -237,7 +235,7 @@ function backToStart() {
   document.querySelector('main').style.justifyContent = 'flex-start'; // Возвращаем наверх
 }
 function goToSite() {
-  window.open('https://example.com/register', '_blank');
+  window.open('https://affpa.top/L?tag=d_3301357m_97c_&site=3301357&ad=97&r=registration', '_blank');
 }
 function copyPromoCode() {
   navigator.clipboard.writeText('ХАЧИ').then(() => {
@@ -259,7 +257,6 @@ function showErrorPopup() {
 function closeErrorPopup() {
   document.getElementById('errorPopup').classList.remove('active');
   document.body.style.overflow = '';
-}
-</script>
+}</script>
 </body>
 </html>
