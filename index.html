@@ -198,14 +198,6 @@
   <h1>MINES HACK BOT</h1>
 </header>
 
-<nav>
-  <a href="#" onclick="showTab('startScreen')" class="active">Старт</a>
-  <a href="#" onclick="showTab('advantages')">Преимущества</a>
-  <a href="#" onclick="showTab('info')">Инфо</a>
-  <a href="#" onclick="showTab('limits')">Ограничения</a>
-  <a href="#" onclick="showTab('bots')">Боты</a>
-</nav>
-
 <main>
   <section id="startScreen" class="active">
     <h2>Начало работы</h2>
@@ -213,7 +205,7 @@
     <button onclick="startRegistration()">Начать</button>
   </section>
 
-  <section id="advantages">
+  <section id="advantages" class="active">
     <h2>Преимущества</h2>
     <ul>
       <li>Высокая точность предсказаний</li>
@@ -223,20 +215,22 @@
     </ul>
   </section>
 
-  <section id="info">
+  <section id="info" class="active">
     <h2>Как работает бот</h2>
     <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
   </section>
 
-  <section id="limits">
+  <section id="limits" class="active">
     <h2>Ограничения</h2>
     <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
   </section>
 
-  <section id="bots">
+  <section id="bots" class="active">
     <h2>Боты</h2>
-    <button onclick="showErrorPopup()">MINES Бот</button>
-    <button onclick="showErrorPopup()">AVIATOR Бот</button>
+    <ul>
+      <li>MINES Бот: входит в комплект</li>
+      <li>AVIATOR Бот: входит в комплект</li>
+    </ul>
   </section>
 
   <section id="registrationScreen">
@@ -271,19 +265,6 @@
 </footer>
 
 <script>
-function showTab(tabId) {
-  document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  
-  const links = document.querySelectorAll('nav a');
-  links.forEach(link => {
-    if (link.getAttribute('onclick')?.includes(`'${tabId}'`)) {
-      link.classList.add('active');
-    }
-  });
-}
-
 function startRegistration() {
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById('registrationScreen').classList.add('active');
@@ -307,12 +288,6 @@ function confirmRegistration() {
 function closePopup() {
   document.getElementById('confirmationPopup').classList.remove('active');
   document.body.style.overflow = '';
-}
-
-function showErrorPopup() {
-  document.getElementById('errorPopup').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  setTimeout(closeErrorPopup, 5000);
 }
 
 function closeErrorPopup() {
