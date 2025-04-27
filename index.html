@@ -37,37 +37,6 @@
       text-shadow: 0 0 10px var(--accent-secondary);
       margin-bottom: 10px;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-      animation: fadeIn 1.5s ease;
-    }
-    nav a {
-      text-decoration: none;
-      background: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
-    nav a:hover {
-      background: var(--accent);
-      color: #001a1d;
-      box-shadow: 0 0 15px var(--accent-secondary);
-    }
-    nav a.active {
-      background: linear-gradient(270deg, var(--accent), var(--accent-secondary));
-      background-size: 400% 400%;
-      color: #001a1d;
-      animation: gradientShift 6s ease infinite;
-      box-shadow: 0 0 15px var(--accent-secondary);
-    }
     main {
       flex: 1;
       padding: 40px 20px;
@@ -143,6 +112,23 @@
       color: var(--text);
       border: 1px solid var(--accent);
     }
+    .progress-bar {
+      width: 100%;
+      background-color: #02202b;
+      border-radius: 30px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .progress {
+      height: 20px;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      animation: progressAnimation 4s forwards;
+    }
+    @keyframes progressAnimation {
+      from { width: 0; }
+      to { width: 100%; }
+    }
     footer p {
       font-size: 0.9em;
       color: var(--accent-secondary);
@@ -157,6 +143,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      animation: popupFadeIn 0.5s ease forwards;
     }
     #confirmationPopup.active, #errorPopup.active {
       display: flex;
@@ -176,10 +163,6 @@
     @keyframes fadeInDown {
       from {opacity: 0; transform: translateY(-40px);}
       to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
     }
     @keyframes popupFadeIn {
       from {opacity: 0; transform: scale(0.8);}
@@ -228,16 +211,27 @@
   <section id="bots" class="active">
     <h2>Боты</h2>
     <ul>
-      <li>MINES Бот: входит в комплект</li>
-      <li>AVIATOR Бот: входит в комплект</li>
+      <li>MINES Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
+      <li>AVIATOR Бот: <button onclick="showErrorPopup()">Открыть бота</button></li>
     </ul>
   </section>
 
   <section id="registrationScreen">
     <h2>Регистрация</h2>
+    <p>Чтобы получить доступ к нашему боту, необходимо зарегистрироваться на сайте нашего партнёра и внести минимальный депозит. Это требуется для активации вашего аккаунта и получения сигналов от бота. Следуйте инструкциям ниже:</p>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    <ul>
+      <li>Перейдите на сайт регистрации</li>
+      <li>Создайте аккаунт, используя промокод "ХАЧИ"</li>
+      <li>Внесите депозит</li>
+      <li>Отправьте скриншот вашего аккаунта для активации</li>
+    </ul>
     <button onclick="goToSite()">Перейти на сайт регистрации</button>
     <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
     <button onclick="confirmRegistration()">Я зарегистрировался</button>
+    <button onclick="backToStart()">Назад</button>
   </section>
 </main>
 
@@ -255,7 +249,7 @@
 <div id="errorPopup">
   <div class="popup-content">
     <h2 style="color: var(--accent); margin-bottom: 20px;">Ошибка доступа</h2>
-    <p>Нет доступа. Пройдите регистрацию.</p>
+    <p>Нет доступа для активации. Следуйте инструкциям и получите доступ.</p>
     <button onclick="closeErrorPopup()">Назад</button>
   </div>
 </div>
@@ -268,6 +262,11 @@
 function startRegistration() {
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById('registrationScreen').classList.add('active');
+}
+
+function backToStart() {
+  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById('startScreen').classList.add('active');
 }
 
 function goToSite() {
@@ -288,6 +287,11 @@ function confirmRegistration() {
 function closePopup() {
   document.getElementById('confirmationPopup').classList.remove('active');
   document.body.style.overflow = '';
+}
+
+function showErrorPopup() {
+  document.getElementById('errorPopup').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeErrorPopup() {
