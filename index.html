@@ -17,7 +17,7 @@
     * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #010a0f 0%, #021017 100%);
+      background: linear-gradient(135deg, var(--bg) 0%, var(--card-bg) 100%);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
@@ -45,7 +45,8 @@
       flex-wrap: wrap;
       animation: fadeIn 1.5s ease;
     }
-    nav button {
+    nav a {
+      text-decoration: none;
       background: transparent;
       color: var(--accent);
       border: 2px solid var(--accent);
@@ -55,22 +56,17 @@
       cursor: pointer;
       transition: all 0.4s ease;
     }
-    nav button:hover {
+    nav a:hover {
       background: var(--accent);
       color: #001a1d;
       box-shadow: 0 0 15px var(--accent-secondary);
     }
-    nav button.active {
+    nav a.active {
       background: linear-gradient(270deg, var(--accent), var(--accent-secondary));
       background-size: 400% 400%;
       color: #001a1d;
       animation: gradientShift 6s ease infinite;
       box-shadow: 0 0 15px var(--accent-secondary);
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
     main {
       flex: 1;
@@ -89,14 +85,17 @@
       width: 90%;
       max-width: 600px;
       box-shadow: var(--border-glow);
-      display: none;
       opacity: 0;
-      transform: translateY(30px);
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
       transition: all 0.6s ease;
     }
     section.active {
-      display: block;
       opacity: 1;
+      visibility: visible;
+      height: auto;
+      overflow: visible;
       transform: translateY(0);
     }
     section h2 {
@@ -105,7 +104,7 @@
       color: var(--accent-secondary);
     }
     ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
       margin-top: 15px;
     }
@@ -119,7 +118,6 @@
       color: var(--accent);
       position: absolute;
       left: 0;
-      top: 0;
     }
     button, input {
       width: 100%;
@@ -156,10 +154,20 @@
       width: 100%; height: 100%;
       background: rgba(0,10,15,0.7);
       backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
+    }
+    #confirmationPopup.active, #errorPopup.active {
+      display: flex;
+    }
+    .popup-content {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 90%;
+      animation: popupFadeIn 0.5s ease;
     }
     @keyframes fadeInUp {
       from {opacity: 0; transform: translateY(40px);}
@@ -177,78 +185,70 @@
       from {opacity: 0; transform: scale(0.8);}
       to {opacity: 1; transform: scale(1);}
     }
-    body::before, body::after {
-      content: "";
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(0,255,195,0.3) 0%, transparent 70%);
-      z-index: 0;
-      animation: pulse 5s infinite alternate;
-    }
-    body::before { top: -50px; left: -50px; }
-    body::after { bottom: -50px; right: -50px; background: radial-gradient(circle, rgba(0,195,255,0.3) 0%, transparent 70%);}
-    @keyframes pulse {
-      0%, 100% {transform: scale(1);}
-      50% {transform: scale(1.2);}
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
 <body>
+
 <header>
   <h1>MINES HACK BOT</h1>
 </header>
 
 <nav>
-  <button onclick="showTab('startScreen')" class="active">Старт</button>
-  <button onclick="showTab('advantages')">Преимущества</button>
-  <button onclick="showTab('info')">Инфо</button>
-  <button onclick="showTab('limits')">Ограничения</button>
-  <button onclick="showTab('bots')">Боты</button>
+  <a href="#" onclick="showTab('startScreen')" class="active">Старт</a>
+  <a href="#" onclick="showTab('advantages')">Преимущества</a>
+  <a href="#" onclick="showTab('info')">Инфо</a>
+  <a href="#" onclick="showTab('limits')">Ограничения</a>
+  <a href="#" onclick="showTab('bots')">Боты</a>
 </nav>
 
 <main>
-<section id="startScreen" class="active">
-  <h2>Начало работы</h2>
-  <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
-  <button onclick="startRegistration()">Начать</button>
-</section>
+  <section id="startScreen" class="active">
+    <h2>Начало работы</h2>
+    <p>Узнайте, как легко выигрывать в MINES с помощью нашего бота!</p>
+    <button onclick="startRegistration()">Начать</button>
+  </section>
 
-<section id="advantages">
-  <h2>Преимущества</h2>
-  <ul>
-    <li>Высокая точность предсказаний</li>
-    <li>Быстрые сигналы в реальном времени</li>
-    <li>Защита от блокировок</li>
-    <li>Стабильный рост баланса при дисциплине</li>
-  </ul>
-</section>
+  <section id="advantages">
+    <h2>Преимущества</h2>
+    <ul>
+      <li>Высокая точность предсказаний</li>
+      <li>Быстрые сигналы в реальном времени</li>
+      <li>Защита от блокировок</li>
+      <li>Стабильный рост баланса при дисциплине</li>
+    </ul>
+  </section>
 
-<section id="info">
-  <h2>Как работает бот</h2>
-  <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
-</section>
+  <section id="info">
+    <h2>Как работает бот</h2>
+    <p>Бот анализирует поведение системы MINES и выдаёт точные сигналы для выигрыша. Всё автоматически и без опыта!</p>
+  </section>
 
-<section id="limits">
-  <h2>Ограничения</h2>
-  <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
-</section>
+  <section id="limits">
+    <h2>Ограничения</h2>
+    <p>Ограниченное количество новых пользователей — 50 в неделю для защиты алгоритма.</p>
+  </section>
 
-<section id="bots">
-  <h2>Боты</h2>
-  <button onclick="showErrorPopup()">MINES Бот</button>
-  <button onclick="showErrorPopup()">AVIATOR Бот</button>
-</section>
+  <section id="bots">
+    <h2>Боты</h2>
+    <button onclick="showErrorPopup()">MINES Бот</button>
+    <button onclick="showErrorPopup()">AVIATOR Бот</button>
+  </section>
 
-<section id="registrationScreen">
-  <h2>Регистрация</h2>
-  <button onclick="goToSite()">Перейти на сайт регистрации</button>
-  <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
-  <button onclick="confirmRegistration()">Я зарегистрировался</button>
-</section>
+  <section id="registrationScreen">
+    <h2>Регистрация</h2>
+    <button onclick="goToSite()">Перейти на сайт регистрации</button>
+    <button onclick="copyPromoCode()">Скопировать промокод: ХАЧИ</button>
+    <button onclick="confirmRegistration()">Я зарегистрировался</button>
+  </section>
+</main>
 
 <div id="confirmationPopup">
-  <div style="background: var(--card-bg); padding: 30px; border-radius: 20px; text-align: center; max-width: 90%; animation: popupFadeIn 0.5s ease;">
+  <div class="popup-content">
     <h2 style="color: var(--accent); margin-bottom: 20px;">Отлично!</h2>
     <p>Отправьте скриншот вашего аккаунта.</p>
     <a href="https://t.me/ThanawatOfficial" target="_blank">
@@ -259,13 +259,12 @@
 </div>
 
 <div id="errorPopup">
-  <div style="background: var(--card-bg); padding: 30px; border-radius: 20px; text-align: center; max-width: 90%; animation: popupFadeIn 0.5s ease;">
+  <div class="popup-content">
     <h2 style="color: var(--accent); margin-bottom: 20px;">Ошибка доступа</h2>
     <p>Нет доступа. Пройдите регистрацию.</p>
     <button onclick="closeErrorPopup()">Назад</button>
   </div>
 </div>
-</main>
 
 <footer>
   <p>&copy; 2025 MINES HACK BOT</p>
@@ -273,41 +272,54 @@
 
 <script>
 function showTab(tabId) {
-  document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
-  const buttons = document.querySelectorAll('nav button');
-  buttons.forEach(button => {
-    if (button.getAttribute('onclick').includes(tabId)) {
-      button.classList.add('active');
+  
+  const links = document.querySelectorAll('nav a');
+  links.forEach(link => {
+    if (link.getAttribute('onclick')?.includes(`'${tabId}'`)) {
+      link.classList.add('active');
     }
   });
 }
+
 function startRegistration() {
   document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
   document.getElementById('registrationScreen').classList.add('active');
 }
+
 function goToSite() {
   window.open('https://example.com/register', '_blank');
 }
+
 function copyPromoCode() {
   navigator.clipboard.writeText('ХАЧИ').then(() => {
     alert('Промокод скопирован!');
   });
 }
+
 function confirmRegistration() {
-  document.getElementById('confirmationPopup').style.display = 'flex';
+  document.getElementById('confirmationPopup').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
+
 function closePopup() {
-  document.getElementById('confirmationPopup').style.display = 'none';
+  document.getElementById('confirmationPopup').classList.remove('active');
+  document.body.style.overflow = '';
 }
+
 function showErrorPopup() {
-  document.getElementById('errorPopup').style.display = 'flex';
+  document.getElementById('errorPopup').classList.add('active');
+  document.body.style.overflow = 'hidden';
   setTimeout(closeErrorPopup, 5000);
 }
+
 function closeErrorPopup() {
-  document.getElementById('errorPopup').style.display = 'none';
+  document.getElementById('errorPopup').classList.remove('active');
+  document.body.style.overflow = '';
 }
 </script>
+
 </body>
 </html>
