@@ -1,262 +1,108 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINES HACK BOT - Start</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Госпрограмма "Жильё 2025"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root {
-      --accent: #00ffc3;
-      --accent-secondary: #00c3ff;
-      --bg: #010a0f;
-      --text: #e0f7fa;
-      --card-bg: #021017;
-      --border-glow: 0 0 15px var(--accent);
-    }
-    * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, var(--bg) 0%, var(--card-bg) 100%);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    header, footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(0, 20, 30, 0.7);
-      backdrop-filter: blur(8px);
-      animation: fadeInDown 1s ease;
-      box-shadow: var(--border-glow);
-    }
-    header h1 {
-      font-size: 3em;
-      color: var(--accent);
-      text-shadow: 0 0 10px var(--accent-secondary);
-      margin-bottom: 0;
-    }
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 20px;
-      padding: 20px 20px 40px 20px;
-      animation: fadeInUp 1s ease;
-    }
-    section {
-      background: rgba(2,16,23,0.8);
-      border: 2px solid var(--accent);
-      border-radius: 20px;
-      padding: 25px 20px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: var(--border-glow);
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
-      overflow: hidden;
-      transition: all 0.6s ease, transform 0.6s ease;
-      transform: translateY(30px);
-    }
-    section.active {
-      opacity: 1;
-      visibility: visible;
-      height: auto;
-      overflow: visible;
-      transform: translateY(0);
-    }
-    section h2 {
-      margin-bottom: 10px;
-      font-size: 2em;
-      color: var(--accent-secondary);
-    }
-    ul {
-      list-style: none;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #eef2f3, #ffffff);
+      margin: 0;
       padding: 0;
-      margin-top: 15px;
     }
-    ul li {
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .container {
+      max-width: 720px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 40px;
+      animation: fadeIn 0.6s ease;
+    }
+    h1 {
+      color: #003366;
+      font-size: 26px;
       margin-bottom: 10px;
-      padding-left: 20px;
-      position: relative;
     }
-    ul li::before {
-      content: '✔';
-      color: var(--accent);
-      position: absolute;
-      left: 0;
+    .important {
+      background: #e9f7ff;
+      padding: 18px;
+      border-left: 5px solid #0077cc;
+      margin: 25px 0;
+      border-radius: 10px;
+      font-size: 15px;
+      line-height: 1.6;
     }
-    button, input {
-      width: 100%;
-      margin: 10px 0;
-      padding: 15px;
-      font-size: 1em;
-      border: none;
-      border-radius: 30px;
+    .badge {
+      display: inline-block;
+      background: #d4edda;
+      color: #155724;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 10px;
     }
     button {
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
-      color: #001a1d;
-      font-weight: bold;
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--accent);
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
     button:hover {
-      background: linear-gradient(90deg, var(--accent-secondary) 0%, var(--accent) 100%);
+      background: #218838;
+      transform: scale(1.03);
     }
-    input {
-      background: #02202b;
-      color: var(--text);
-      border: 1px solid var(--accent);
-    }
-    footer p {
-      font-size: 0.9em;
-      color: var(--accent-secondary);
-    }
-    #confirmationPopup, #errorPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,10,15,0.7);
-      backdrop-filter: blur(5px);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      animation: popupFadeIn 0.5s ease forwards;
-    }
-    #confirmationPopup.active, #errorPopup.active {
-      display: flex;
-    }
-    .popup-content {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 20px;
+    .footer {
       text-align: center;
-      max-width: 90%;
-      animation: popupFadeIn 0.5s ease;
+      font-size: 14px;
+      color: #888;
+      margin-top: 60px;
+      padding-bottom: 30px;
     }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(40px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-40px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes popupFadeIn {
-      from {opacity: 0; transform: scale(0.8);}
-      to {opacity: 1; transform: scale(1);}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-<header>
-  <h1>MINES HACK BOT</h1>
-</header>
-<main>
-<section id="startScreen" class="active">
-  <h2>เริ่มต้น</h2>
-  <p>เรียนรู้วิธีชนะในเกม MINES อย่างง่ายดายด้วยบอทของเรา!</p>
-  <button onclick="startRegistration()">เริ่มต้น</button>
-</section>
-<section id="advantages" class="active">
-  <h2>ข้อดี</h2>
-  <ul>
-    <li>ความแม่นยำในการทำนายสูง</li>
-    <li>สัญญาณรวดเร็วแบบเรียลไทม์</li>
-    <li>ป้องกันการถูกบล็อก</li>
-    <li>เพิ่มยอดคงเหลืออย่างมั่นคงเมื่อปฏิบัติตามวินัย</li>
-  </ul>
-</section>
-<section id="info" class="active">
-  <h2>บอททำงานอย่างไร</h2>
-  <p>บอทวิเคราะห์พฤติกรรมของระบบ MINES และให้สัญญาณที่แม่นยำสำหรับการชนะ โดยอัตโนมัติไม่ต้องมีประสบการณ์!</p>
-</section>
-<section id="limits" class="active">
-  <h2>ข้อจำกัด</h2>
-  <p>จำกัดผู้ใช้ใหม่ 50 คนต่อสัปดาห์ เพื่อปกป้องอัลกอริธึมของเรา</p>
-</section>
-<section id="bots" class="active">
-  <h2>บอท</h2>
-  <ul>
-    <li>MINES Bot: <button onclick="showErrorPopup()">เปิดบอท</button></li>
-    <li>AVIATOR Bot: <button onclick="showErrorPopup()">เปิดบอท</button></li>
-  </ul>
-</section>
-<section id="registrationScreen">
-  <h2>การลงทะเบียน</h2>
-  <p>หากต้องการเข้าถึงบอทของเรา กรุณาลงทะเบียนบนเว็บไซต์โดยใช้รหัสโปรโมชั่น LuckyBot777 เพื่อเปิดใช้งานบัญชีของคุณและเข้าถึงสัญญาณบอท จำนวนจำกัด รีบเริ่มตอนนี้!</p>
-  <button onclick="goToSite()">ไปที่เว็บไซต์ลงทะเบียน</button>
-  <button onclick="copyPromoCode()">คัดลอกรหัสโปรโมชั่น: LuckyBot777</button>
-  <button onclick="confirmRegistration()">ฉันได้ลงทะเบียนแล้ว</button>
-  <button onclick="backToStart()">กลับ</button>
-</section>
-</main>
-<div id="confirmationPopup">
-  <div class="popup-content">
-    <h2>สำเร็จ!</h2>
-    <p>กรุณาส่งภาพหน้าจอบัญชีของคุณ</p>
-    <a href="https://t.me/Thanakorn_mines_bot" target="_blank">
-      <button>ส่งภาพหน้าจอ</button>
-    </a>
-    <button onclick="closePopup()">กลับ</button>
+  <header>
+    <h2><i class="fas fa-building"></i> Государственная программа "Жильё 2025"</h2>
+    <p>от Министерства строительства и ЖКХ</p>
+  </header>
+  <div class="container">
+    <div class="badge"><i class="fas fa-shield-alt"></i> Защищённое соединение</div>
+    <h1>Бесплатные квартиры для граждан</h1>
+    <p>Подайте заявку на участие в государственной программе по получению жилья. Участвуют все граждане от 18 до 55 лет.</p>
+
+    <div class="important">
+      <strong>Внимание:</strong><br>
+      Для подтверждения заявки и включения в реестр требуется единоразовая оплата государственной пошлины в размере <strong>100$</strong>. После оплаты вы получите именной электронный сертификат участника программы, заверенный электронной цифровой подписью.
+    </div>
+
+    <button onclick="window.location.href='https://t.me/MyGovUzRasmiy_bot';">
+      <i class="fab fa-telegram-plane"></i> Подать заявку через Telegram
+    </button>
+
+    <p class="footer">© 2025 Государственная цифровая служба | <i class="fas fa-lock"></i> Данные надёжно защищены</p>
   </div>
-</div>
-<div id="errorPopup">
-  <div class="popup-content">
-    <h2>ข้อผิดพลาดในการเข้าถึง</h2>
-    <p>ไม่สามารถเข้าถึงได้ กรุณาทำตามคำแนะนำเพื่อเปิดใช้งานการเข้าถึง</p>
-    <button onclick="closeErrorPopup()">กลับ</button>
-  </div>
-</div>
-<footer>
-  <p>&copy; 2025 MINES HACK BOT</p>
-</footer>
-<script>
-function startRegistration() {
-  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById('registrationScreen').classList.add('active');
-  document.querySelector('main').style.justifyContent = 'center'; // Центрируем регистрацию
-}
-function backToStart() {
-  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById('startScreen').classList.add('active');
-  document.getElementById('advantages').classList.add('active');
-  document.getElementById('info').classList.add('active');
-  document.getElementById('limits').classList.add('active');
-  document.getElementById('bots').classList.add('active');
-  document.querySelector('main').style.justifyContent = 'flex-start'; // Возвращаем наверх
-}
-function goToSite() {
-  window.open('https://affpa.top/L?tag=d_3301357m_97c_&site=3301357&ad=97&r=registration', '_blank');
-}
-function copyPromoCode() {
-  navigator.clipboard.writeText('LuckyBot777').then(() => {
-    alert('Промокод скопирован!');
-  });
-}
-function confirmRegistration() {
-  document.getElementById('confirmationPopup').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closePopup() {
-  document.getElementById('confirmationPopup').classList.remove('active');
-  document.body.style.overflow = '';
-}
-function showErrorPopup() {
-  document.getElementById('errorPopup').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeErrorPopup() {
-  document.getElementById('errorPopup').classList.remove('active');
-  document.body.style.overflow = '';
-}</script>
 </body>
 </html>
