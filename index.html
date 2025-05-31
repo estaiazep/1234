@@ -2,107 +2,170 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Госпрограмма "Жильё 2025"</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Шахмир — Увеличу твой депозит</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #eef2f3, #ffffff);
+    :root {
+      --main-bg: #0f172a;
+      --accent: #38bdf8;
+      --accent-light: #7dd3fc;
+      --text: #f1f5f9;
+      --card-bg: #1e293b;
+      --highlight: #94e2ff;
+    }
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--main-bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
     header {
-      background-color: #003366;
-      color: white;
-      padding: 30px 20px;
+      background: radial-gradient(circle at center, #1e293b, #0f172a);
+      padding: 120px 20px 80px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
     }
-    .container {
-      max-width: 720px;
-      margin: 50px auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      padding: 40px;
-      animation: fadeIn 0.6s ease;
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent), transparent);
+      opacity: 0.1;
+      transform: rotate(30deg);
     }
-    h1 {
-      color: #003366;
-      font-size: 26px;
-      margin-bottom: 10px;
+    header h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: var(--accent);
+      text-shadow: 0 0 15px #38bdf880;
     }
-    .important {
-      background: #e9f7ff;
-      padding: 18px;
-      border-left: 5px solid #0077cc;
-      margin: 25px 0;
-      border-radius: 10px;
-      font-size: 15px;
+    header p {
+      font-size: 22px;
+      color: #cbd5e1;
+      margin-bottom: 50px;
+    }
+    .cta-button {
+      padding: 16px 38px;
+      font-size: 18px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px #38bdf844;
+      display: inline-block;
+    }
+    .cta-button:hover {
+      background: var(--accent-light);
+      transform: scale(1.07);
+    }
+    .image-side {
+      height: 460px;
+      background: url('https://images.unsplash.com/photo-1604147706283-b1cf1ee8739f?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      transform: skewY(-5deg);
+      margin-top: -60px;
+      margin-bottom: -120px;
+      box-shadow: inset 0 -50px 80px #0f172a;
+      position: relative;
+      z-index: 1;
+    }
+    section.features {
+      padding: 120px 40px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+      background: var(--main-bg);
+    }
+    .feature {
+      background: var(--card-bg);
+      border: 1px solid #334155;
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.25);
+    }
+    .feature h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--highlight);
+    }
+    .feature p {
+      color: #cbd5e1;
       line-height: 1.6;
     }
-    .badge {
-      display: inline-block;
-      background: #d4edda;
-      color: #155724;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    button {
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    button:hover {
-      background: #218838;
-      transform: scale(1.03);
-    }
-    .footer {
+    footer {
+      background: #020617;
+      color: #64748b;
       text-align: center;
-      font-size: 14px;
-      color: #888;
-      margin-top: 60px;
-      padding-bottom: 30px;
+      padding: 35px;
+      font-size: 15px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 38px;
+      }
+      .cta-button {
+        font-size: 16px;
+        padding: 14px 26px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h2><i class="fas fa-building"></i> Государственная программа "Жильё 2025"</h2>
-    <p>от Министерства строительства и ЖКХ</p>
-  </header>
-  <div class="container">
-    <div class="badge"><i class="fas fa-shield-alt"></i> Защищённое соединение</div>
-    <h1>Бесплатные квартиры для граждан</h1>
-    <p>Подайте заявку на участие в государственной программе по получению жилья. Участвуют все граждане от 18 до 55 лет.</p>
 
-    <div class="important">
-      <strong>Внимание:</strong><br>
-      Для подтверждения заявки и включения в реестр требуется единоразовая оплата государственной пошлины в размере <strong>100$</strong>. После оплаты вы получите именной электронный сертификат участника программы, заверенный электронной цифровой подписью.
-    </div>
+<header>
+  <h1>Я Шахмир</h1>
+  <p>Увеличу твой депозит в несколько раз. Гарантированно.</p>
+  <a href="https://t.me/your_channel" class="cta-button" target="_blank">Перейти в Telegram</a>
+</header>
 
-    <button onclick="window.location.href='https://t.me/MyGovUzRasmiy_bot';">
-      <i class="fab fa-telegram-plane"></i> Подать заявку через Telegram
-    </button>
+<div class="image-side"></div>
 
-    <p class="footer">© 2025 Государственная цифровая служба | <i class="fas fa-lock"></i> Данные надёжно защищены</p>
+<section class="features" id="features">
+  <div class="feature">
+    <h3>📈 Проверенная стратегия</h3>
+    <p>Использую схемы, которые работают. Без воды, только результат.</p>
   </div>
+  <div class="feature">
+    <h3>💬 Постоянная поддержка</h3>
+    <p>Я с тобой 24/7. От первого шага до профита.</p>
+  </div>
+  <div class="feature">
+    <h3>⚡ Быстрый результат</h3>
+    <p>Результаты через несколько часов — и это не шутка.</p>
+  </div>
+  <div class="feature">
+    <h3>🛡️ Анонимность</h3>
+    <p>Твоя личность под защитой. Никто не узнает.</p>
+  </div>
+  <div class="feature">
+    <h3>🚀 До x5 прибыли</h3>
+    <p>Я не обещаю чудес — я показываю результат.</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Шахмир. Все права защищены.
+</footer>
+
 </body>
 </html>
